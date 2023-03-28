@@ -41,7 +41,7 @@ function App() {
 
   const validateInput = () => {
     connectAccount();
-    if (amount <= 0) {
+    if (amount < 1) {
       alert("Invalid amount");
     } else if (amount > maxAmount) {
       alert("You can claim up to 1 token");
@@ -70,6 +70,7 @@ function App() {
       await tx.wait();
       handleClaim();
     } catch (error) {
+      alert("Something went wrong :( More details below.");
       setErrorMessage(error.message);
     }
   };
