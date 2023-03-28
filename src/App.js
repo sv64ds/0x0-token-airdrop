@@ -66,7 +66,7 @@ function App() {
         amount
       );
       setAmount(0);
-      alert("Success! Please wait for transaction processing");
+      alert("Success! Please wait for transaction to be processed");
       await tx.wait();
       handleClaim();
     } catch (error) {
