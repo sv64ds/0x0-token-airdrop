@@ -7,7 +7,7 @@ const I0x0TokenAddress = "0x913C237692621483965964b0618D3e6FBB6aBcEF";
 const I0x0TokenABI = require("./contracts/token-abi.json");
 
 function App() {
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [claimed, setClaimed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [connected, setConnected] = useState(window.ethereum.selectedAddress);
@@ -50,6 +50,10 @@ function App() {
     }
   };
 
+  const handleClaim = () => {
+    alert(`Successfully claimed ${amount / 10 ** 18} 0x0TT's`);
+  };
+
   const claimAirdrop = async () => {
     try {
       const I0x0Token = await new ethers.Contract(
@@ -61,8 +65,10 @@ function App() {
         I0x0TokenAddress,
         amount
       );
+      setAmount(0);
+      alert("Success! Please wait for transaction processing");
       await tx.wait();
-      setClaimed(true);
+      handleClaim();
     } catch (error) {
       setErrorMessage(error.message);
     }
